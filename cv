@@ -1,0 +1,19 @@
+import cv2
+import numpy as np
+base_img = cv2.imread("C:\\opencv\\section1\\Lect_01_Red_image_video\\frame_0000.jpg")
+gray_img = cv2.cvtColor(base_img,cv2.COLOR_BGR2GRAY)
+blur_img = cv2.GaussianBlur(base_img,(47,47),0)
+kernel= np.ones((5,5),np.uint8)
+t_lower=240
+t_higher=270
+edge_img = cv2.Canny(base_img,t_lower,t_higher)
+dis_img=cv2.dilate(edge_img,kernel,iterations=1)
+ero_img=cv2.erode(dis_img,kernel,iterations=1)
+cv2.imshow("original image", base_img)
+cv2.imshow("Gray image", gray_img)
+cv2.imshow("blur image", blur_img)
+cv2.imshow("Dilation image", dis_img)
+cv2.imshow("Erosion image", ero_img)
+cv2.waitKey(0)
+
+
